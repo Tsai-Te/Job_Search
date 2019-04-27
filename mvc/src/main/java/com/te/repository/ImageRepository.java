@@ -8,6 +8,6 @@ import java.util.List;
 public interface ImageRepository extends CrudRepository<Image, Long> {
     List<Image> findAll();
     List<Image> findByUser_id(Long id);
-    Image findByS3Key(String s3Key);
+//    Image findByS3Key(String s3Key);
 
 }

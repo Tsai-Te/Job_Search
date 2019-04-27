@@ -33,6 +33,7 @@ public class Image {
     private User user; //mappedBy = "user"
 //    private Long user_id;//todo ask
 
+    @NotNull
     @Column(name="extension")
     private String extension;
 
