@@ -1,0 +1,1 @@
+alter sequence region_id_seq owned by regions.id;

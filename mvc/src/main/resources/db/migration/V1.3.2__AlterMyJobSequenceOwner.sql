@@ -1,0 +1,1 @@
+alter sequence my_job_id_seq owned by my_jobs.id;

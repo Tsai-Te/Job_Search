@@ -1,0 +1,1 @@
+alter table images add column image_title varchar(255);

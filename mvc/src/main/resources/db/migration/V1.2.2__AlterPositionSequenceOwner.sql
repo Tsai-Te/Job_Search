@@ -1,0 +1,1 @@
+alter sequence position_id_seq owned by positions.id;
