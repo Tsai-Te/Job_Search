@@ -21,6 +21,7 @@ public class UserService {
     @Autowired
     private AuthorityService authorityService;
 
+
     @Transactional
     public List<User> findAll(){
         return userRepository.findAll();
@@ -36,6 +37,15 @@ public class UserService {
         authorityService.addAuthority("ROLE_REGISTERED_USER",result);
         return result;
     }
+
+//    @Transactional
+//    public User setPassword(String password){
+//        User user=new User();
+//        String encodePassword=encoder.encode(user.getPassword());
+//        user.setPassword(encodePassword);
+//        User newPassword=userRepository.save(password);
+//        return newPassword;
+//    }
 
     @Transactional
     public User generateUser(User newUser){

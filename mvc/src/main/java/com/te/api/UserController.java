@@ -5,6 +5,7 @@ import com.te.domain.User;
 import com.te.extend.security.JwtTokenUtil;
 import com.te.extend.security.RestAuthenticationRequest;
 import com.te.service.UserService;
+import org.hibernate.annotations.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -176,7 +177,15 @@ public class UserController  { //todo ask about BaseController
 //    }
 
     //todo setpassword
-
+//    @RequestMapping(value = "/password", method = RequestMethod.PATCH)
+//    private User setPassword(@RequestParam ("password") String password) {
+//        logger.debug("User" +password);
+//        User user=userService.setPassword();
+////        user.setPassword("1");
+////        user.setUser(user);
+//        userService.save(user);
+//        return user;
+//    }
 
 
 }
