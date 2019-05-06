@@ -16,4 +16,5 @@ String date="03/12/2019";
  
  mvn clean compile flyway:migrate -P unit -Ddb_url=localhost:1234/jobsearch_unit -Ddb_username= -Ddb_password=
  
+ how to generate a package from maven:
  mvn clean compile package -DskipTests=true

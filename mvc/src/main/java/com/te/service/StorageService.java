@@ -36,6 +36,10 @@ public class StorageService {
         return s3.getObject(bucket, S3key);
     }
 
+    public S3Object getObjectUrl (String bucket, String S3key){
+        return s3.getObject(bucket,S3key);
+    }
+
     public void setBucket(String bucket){
         this.bucket=bucket;
     }

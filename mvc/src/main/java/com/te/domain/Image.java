@@ -37,6 +37,10 @@ public class Image {
     @Column(name="extension")
     private String extension;
 
+//    @NotNull
+//    @Column(name="url")
+//    private String url;
+
 //    private Long user_id;
 
 //    @NotNull
@@ -63,6 +67,8 @@ public class Image {
         this.extension=extension;
     }
 
+//    public String getUrl(){return url;}
+//    public void setUrl(String url){this.url=url;}
 
 }
 

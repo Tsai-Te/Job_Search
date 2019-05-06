@@ -180,7 +180,13 @@ public class UserController  { //todo ask about BaseController
 //    @RequestMapping(value = "/password", method = RequestMethod.PATCH)
 //    private User setPassword(@RequestParam ("password") String password) {
 //        logger.debug("User" +password);
-//        User user=userService.setPassword();
+////        enter email through an api
+////        api will generate a password
+////        user get the password to login with email
+////        once user login, it will enter new password to serpassword
+//        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//        User user=userService.findByUsername(username);
+//        user.setPassword(password);
 ////        user.setPassword("1");
 ////        user.setUser(user);
 //        userService.save(user);

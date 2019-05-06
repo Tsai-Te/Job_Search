@@ -61,5 +61,21 @@ public class StorageServiceTest {
         storageService.getObject(s3key2);
         verify(client,times(1))
                 .getObject(s3Bucket,s3key);
+        storageService.getObject(s3Bucket,s3key);
+        verify(client,times(2))
+                .getObject(s3Bucket,s3key);
+    }
+
+    @Test
+    public void putObjectTest(){
+        storageService.putObject(s3Bucket,s3key,file);
+        verify(client,times(1))
+                .putObject(s3Bucket,s3key,file);
+        storageService.putObject(s3Bucket,s3key2,file);
+        verify(client,times(1))
+                .putObject(s3Bucket,s3key2,file);
+        storageService.putObject(s3key,file);
+        verify(client,times(2))
+                .putObject(s3Bucket,s3key,file);
     }
 }
