@@ -3,7 +3,10 @@ package com.te.config;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.te.service.StorageService;
+import com.te.service.jms.MessageSQSService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +60,18 @@ public class AppConfig { //whole project configuration //backend
 //        storageService.setBucket("testbucket");
         return storageService;
     }
+
+    @Bean
+    public MessageSQSService getSQSService(@Autowired @Qualifier("databaseProperties") PropertiesFactoryBean beanFactory) throws IOException {
+        AmazonSQS sqs= AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
+        MessageSQSService messageSQSService = new MessageSQSService(sqs,"amazon.sqs.url");
+        return messageSQSService;
+    }
+
+//    @Bean
+//    public AmazonSQS getAmazonSQS(){
+//        AmazonSQS client=AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
+//        return client;
+//    }
 
 }

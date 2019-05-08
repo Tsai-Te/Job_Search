@@ -41,24 +41,24 @@ public class ImageService {
     @Transactional
     public List<Image> findByUser_id(Long id){return imageRepository.findByUser_id(id);}
 
-//    @Transactional
-//    public Image saveFakeImage(MultipartFile multipartFile, boolean isPublic) throws ServiceException {
-//        if(multipartFile == null||multipartFile.isEmpty()) throw new ServiceException("File must not be empty");
-//        String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
-//        String homeDir = System.getProperty("catalina.base") !=null ? System.getProperty("catalina.base"); //todo ask what is "?"
-//        Image image=new Image();
-//        String s3Key = FilenameUtils.getBaseName(multipartFile.getOriginalFilename()+"_"+image.getUuid());
-//        File localFile = new File(homeDir+s3Key);
-//        try {
-//            multipartFile.transferTo(localFile);
-//            storageService.putObject(s3Key,localFile);
-//            S3Object s3Object = storageService.getObject(s3Key);
-//            image.setUrl(storageService.getObjectUrl(s3Object.getKey(),));
-//            image.setExtension(extension);
-//            return image;
-//        } catch (IOException e) {
-//            logger.warn("cannot find the image file");
-//        }
-//        return null;
-//    }
+    @Transactional
+    public Image saveFakeImage(MultipartFile multipartFile) throws ServiceException {
+        if(multipartFile == null||multipartFile.isEmpty()) throw new ServiceException("File must not be empty");
+        String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
+        String homeDir = System.getProperty("catalina.base") !=null ? System.getProperty("catalina.base"): null;           //todo ask what is "?"
+        Image image=new Image();
+        String s3Key = FilenameUtils.getBaseName(multipartFile.getOriginalFilename()+"_"+image.getUuid());
+        File localFile = new File(homeDir+s3Key);
+        try {
+            multipartFile.transferTo(localFile);
+            storageService.putObject(s3Key,localFile);
+            S3Object s3Object = storageService.getObject(s3Key);
+            image.setUrl(storageService.getObjectUrl(s3Object.getKey()));
+            image.setExtension(extension);
+            return image;
+        } catch (IOException e) {
+            logger.warn("cannot find the image file");
+        }
+        return null;
+    }
 }
