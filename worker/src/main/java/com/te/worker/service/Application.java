@@ -1,7 +1,8 @@
-package hello.service;
+package com.te.worker.service;
 
 import java.util.Arrays;
 
+import com.te.worker.service.jms.MessageSQSService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +13,11 @@ import org.springframework.context.annotation.Bean;
 public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        ApplicationContext applicationContext=SpringApplication.run(Application.class, args);
+        MessageSQSService messageSQSService=applicationContext.getBean(MessageSQSService.class);
+        messageSQSService.receiveMessage();
+
+//        SpringApplication.run(Application.class, args);
     }
 
     @Bean

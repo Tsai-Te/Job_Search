@@ -25,11 +25,11 @@ public class MessageSQSService {
     }
 
     public void sendMessage(String messageBody, Integer delaySecond){
-        SendMessageRequest send_msg_request = new SendMessageRequest()
+        SendMessageRequest sendMsgRequest = new SendMessageRequest()
                 .withQueueUrl(queueUrl)
                 .withMessageBody(messageBody)
                 .withDelaySeconds(delaySecond);
-        sqs.sendMessage(send_msg_request);
+        sqs.sendMessage(sendMsgRequest);
     }
 
 }

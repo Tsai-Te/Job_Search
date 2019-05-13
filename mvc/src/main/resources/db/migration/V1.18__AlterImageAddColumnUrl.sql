@@ -1,0 +1,1 @@
+alter table images add column url varchar(255) not null unique;

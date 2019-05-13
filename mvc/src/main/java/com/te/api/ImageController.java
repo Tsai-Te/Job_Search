@@ -43,7 +43,7 @@ public class ImageController {
     }
 
     @ResponseBody
-    @RequestMapping (value="user", method=RequestMethod.POST, consumes = {"multipart/form-data"})
+    @RequestMapping (value="/user", method=RequestMethod.POST, consumes = {"multipart/form-data"})
     public Map<String, String> uploadImage (@RequestParam(value="pic") MultipartFile multipartFile){
         Map<String, String> result= new HashMap<>(1);
         try{

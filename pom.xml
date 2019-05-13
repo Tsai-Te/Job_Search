@@ -8,6 +8,11 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <aws.sdk.version>1.11.534</aws.sdk.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.data</groupId>
@@ -42,6 +47,11 @@
             <version>5.1.6.RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>${aws.sdk.version}</version>
+        </dependency>
     </dependencies>
 
     <name>job-search</name>
@@ -52,9 +62,5 @@
         <module>mvc</module>
         <module>worker</module>
     </modules>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
 
 </project>

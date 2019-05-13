@@ -64,7 +64,8 @@ public class AppConfig { //whole project configuration //backend
     @Bean
     public MessageSQSService getSQSService(@Autowired @Qualifier("databaseProperties") PropertiesFactoryBean beanFactory) throws IOException {
         AmazonSQS sqs= AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
-        MessageSQSService messageSQSService = new MessageSQSService(sqs,"amazon.sqs.url");
+        String queueUrl = beanFactory.getObject().getProperty("amazon.sqs.url");
+        MessageSQSService messageSQSService = new MessageSQSService(sqs,queueUrl);
         return messageSQSService;
     }
 
