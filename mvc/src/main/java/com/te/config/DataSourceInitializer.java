@@ -35,13 +35,13 @@ public class DataSourceInitializer {
     @Autowired
     private Environment environment;
 
-    @Value("#{databaseProperties['database.databaseUrl']}")
+    @Value("#{databaseProperties['database.serverName']}")
     protected String databaseUrl;
 
-    @Value("#{databaseProperties['database.databaseUsername']}")
+    @Value("#{databaseProperties['database.username']}")
     protected String databaseUsername;
 
-    @Value("#{databaseProperties['database.databasePassword']}")
+    @Value("#{databaseProperties['database.password']}")
     protected String databasePassword;
 
     @Value("#{databaseProperties['database.dataSourceClassName']}")

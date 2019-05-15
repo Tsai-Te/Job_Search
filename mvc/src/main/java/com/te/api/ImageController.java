@@ -43,14 +43,14 @@ public class ImageController {
     }
 
     @ResponseBody
-    @RequestMapping (value="/user", method=RequestMethod.POST, consumes = {"multipart/form-data"})
+    @RequestMapping (value={"/user","/users"}, method=RequestMethod.POST, consumes = {"multipart/form-data"})
     public Map<String, String> uploadImage (@RequestParam(value="pic") MultipartFile multipartFile){
         Map<String, String> result= new HashMap<>(1);
         try{
             Image image=imageService.saveFakeImage(multipartFile);
             result.put("s3_url", image.getUrl());
         } catch (ServiceException e) {
-            logger.error ("error on savin record",e);
+            logger.error ("error on saving record",e);
         }
         return result;
     }
