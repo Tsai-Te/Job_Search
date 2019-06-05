@@ -16,12 +16,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @WebAppConfiguration
 @ContextConfiguration(classes={AppConfig.class}) //also in web.xml
@@ -36,12 +36,6 @@ public class JwtTokenUtilTest {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
 
     @Autowired
     private UserService userService;
@@ -64,12 +58,20 @@ public class JwtTokenUtilTest {
 
     @Test
     @Transactional
+    public void generateTokenTest() {
+        userService.createUser(newUser);
+        String expectedToken = jwtTokenUtil.generateToken(newUser);
+        String[] testToken=expectedToken.split("\\.");
+        assertEquals(3,testToken.length);
+    }
+
+    @Test
+    @Transactional
     public void getUsernameFromTokenTest() {
         userService.createUser(newUser);
         String expectedToken=jwtTokenUtil.generateToken(newUser);
         String actualUsername=jwtTokenUtil.getUsernameFromToken(expectedToken);
         assertEquals(newUser.getUsername(),actualUsername);
 //        assertNotNull(actualUsername);
-
     }
 }

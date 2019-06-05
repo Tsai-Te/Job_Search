@@ -10,10 +10,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class Application {
+public class WorkerApplication {
 
     public static void main(String[] args) {
-        ApplicationContext applicationContext=SpringApplication.run(Application.class, args);
+        ApplicationContext applicationContext=SpringApplication.run(WorkerApplication.class, args);
         MessageSQSService messageSQSService=applicationContext.getBean(MessageSQSService.class);
         messageSQSService.receiveMessage();
 

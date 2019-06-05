@@ -8,14 +8,12 @@ import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -31,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String emailOrUsername) {//todo ask about this method
+    public UserDetails loadUserByUsername(String emailOrUsername) throws UsernameNotFoundException {//todo ask about this method
         logger.debug(emailOrUsername + "is trying to log in from spring security");
         User domainUser = null;
         try {

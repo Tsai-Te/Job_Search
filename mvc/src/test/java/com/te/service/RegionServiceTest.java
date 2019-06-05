@@ -56,9 +56,11 @@ public class RegionServiceTest {
         List<Region> actualRegion=regionService.findByCity(expectedRegion.getCity());
         Region region=actualRegion.get(0);
 //        assertEquals(1,actualRegion.size());
-
         assertNotNull(city);
         assertEquals(expectedRegion.getId(),region.getId());
+        for (Region region1 : actualRegion){
+            assertEquals(expectedRegion.getCity(), region1.getCity());
+        }
     }
 
     @Test
@@ -70,10 +72,12 @@ public class RegionServiceTest {
         expectedRegion.setZipCode(zipCode);
         regionRepository.save(expectedRegion);
         List<Region> actualRegion=regionService.findByState(expectedRegion.getState());
-
         assertNotNull(actualRegion);
         assertEquals(1,actualRegion.size());
         assertEquals(expectedRegion.getId(),actualRegion.get(0).getId());
+        for (Region region : actualRegion){
+            assertEquals(expectedRegion.getId(), region.getId());
+        }
     }
 
     @Test
@@ -86,7 +90,6 @@ public class RegionServiceTest {
 //        regionRepository.save(newRegion);
         regionService.generateRegion(newRegion);
         Region actualRegion=regionService.findById(newRegion.getId());
-
         assertNotNull(newRegion);
         assertEquals(newRegion.getId(),actualRegion.getId());
     }
@@ -101,9 +104,11 @@ public class RegionServiceTest {
         regionRepository.save(expectedRegion);
         List<Region> actualRegion=regionService.findAll();
         Region region=actualRegion.get(0);
-
         assertEquals(1,actualRegion.size());
         assertEquals(expectedRegion.getId(),region.getId());
+        for (Region region1 : actualRegion){
+            assertEquals(expectedRegion.getId(), region1.getId());
+        }
     }
 
     @Test
@@ -115,10 +120,12 @@ public class RegionServiceTest {
         expectedRegion.setZipCode(zipCode);
         regionRepository.save(expectedRegion);
         List<Region> actualRegion=regionService.findByZipCode(expectedRegion.getZipCode());
-
         assertNotNull(zipCode);
         assertEquals(1,actualRegion.size());
         assertEquals(expectedRegion.getId(),actualRegion.get(0).getId());
+        for (Region region :actualRegion){
+            assertEquals(expectedRegion.getZipCode(),region.getZipCode());
+        }
     }
 
     @Test

@@ -52,4 +52,10 @@ public class JmsConfig {
         jmsListenerContainerFactory.setSessionAcknowledgeMode(Session.AUTO_ACKNOWLEDGE);
         return jmsListenerContainerFactory;
     }
+
+    @Bean
+    public AmazonSQS getAmazonSQS(){
+        AmazonSQS client=AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
+        return client;
+    }
 }

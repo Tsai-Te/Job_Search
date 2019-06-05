@@ -31,8 +31,8 @@ public class UserService {
 
     @Transactional
     public User createUser(User newUser){
-        String encodePassword=encoder.encode(newUser.getPassword());
-        newUser.setPassword(encodePassword);
+        String encodedPassword=encoder.encode(newUser.getPassword());
+        newUser.setPassword(encodedPassword);
         User result=userRepository.save(newUser);
         authorityService.addAuthority("ROLE_REGISTERED_USER",result);
         return result;

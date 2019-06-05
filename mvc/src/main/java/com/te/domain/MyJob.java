@@ -21,7 +21,7 @@ public class MyJob {
     private User user;
 
     @Column(name="saved_jobs")
-    private String savedJobs;
+    private String savedJobs="xxx";
 
     public Long getId(){return id;}
 

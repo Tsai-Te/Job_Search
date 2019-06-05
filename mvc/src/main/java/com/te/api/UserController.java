@@ -5,6 +5,7 @@ import com.te.domain.User;
 import com.te.extend.security.JwtTokenUtil;
 import com.te.extend.security.RestAuthenticationRequest;
 import com.te.service.UserService;
+import javassist.NotFoundException;
 import org.hibernate.annotations.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +60,7 @@ public class UserController  { //todo ask about BaseController
 
     @RequestMapping(method= RequestMethod.GET)
     public List<User> getUserList(){ //if void, should not have any return type, such as List<User>
-        logger.debug("list users");
+//        logger.debug("list users");
         return userService.findAll();
     }
 
@@ -76,10 +77,18 @@ public class UserController  { //todo ask about BaseController
         return userService.findByFirstName(firstName);
     }
 
+    //todo try catch
     @RequestMapping(method = RequestMethod.GET, params={"username"})
     public User findByUsername(String username) throws Exception {
-        logger.debug("parameter is"+username);
-        return userService.findByUsername(username);
+        User user =null;
+        try {
+            logger.debug("parameter is"+username);
+            user=userService.findByUsername(username);
+        }
+        catch (NotFoundException e) {
+            logger.debug("could not find this username");
+        }
+        return user;
     }
 
     @RequestMapping (value="/login", method = RequestMethod.POST) //todo write an api for login by username or email

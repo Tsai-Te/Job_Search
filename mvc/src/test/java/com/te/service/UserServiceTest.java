@@ -45,7 +45,7 @@ public class UserServiceTest {
     private AuthorityRepository authorityRepository;
 
     @Test
-    @Transactional
+    @Transactional //tear down
     public void findAll() throws ParseException {
         User expectedUser = new User();
         expectedUser.setUsername(username);
@@ -58,9 +58,11 @@ public class UserServiceTest {
         expectedUser.setDateOfBirth(dateOfBirth);
         userService.createUser(expectedUser);
         List<User> actualUser = userService.findAll();
-
         assertNotNull(expectedUser);
         assertEquals(expectedUser.getId(),actualUser.get(0).getId());
+        for (User user : actualUser){
+            assertEquals(expectedUser.getId(), user.getId());
+        }
         assertNotNull(password,actualUser.get(0).getPassword());
 //        assertEquals(expectedUser.getAuthorities(),actualUser.get(0).getAuthorities());
     }
@@ -84,7 +86,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @Transactional
+    @Transactional //tear down to remove this record
     public void generateUserTest () throws ParseException {
         User newUser=new User();
         newUser.setUsername(username);
@@ -135,6 +137,9 @@ public class UserServiceTest {
         assertNotNull(firstName);
         assertEquals(1,actualUser.size());
         assertEquals(expectedUser.getFirstName(),actualUser.get(0).getFirstName());
+        for (User user : actualUser){
+            assertEquals(firstName, user.getFirstName());
+        }
     }
 
     @Test
@@ -166,7 +171,7 @@ public class UserServiceTest {
 //        assertEquals(newAuthority.getId(),actualAuthority.getId());
         assertEquals(newAuthority.getId(),actualAuthorities.get(1).getId());
         for (Authority authority:actualAuthorities){
-            assertEquals(authority.getAuthority(),"ROLE_REGISTERED_USER");
+            assertEquals("ROLE_REGISTERED_USER", authority.getAuthority());
         }
 //        assertEquals(1,actualAuthorities.size());
 //        assertEquals(newUser.getAuthorities(),actualUser.getAuthorities());

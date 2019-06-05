@@ -105,4 +105,10 @@ public class JwtTokenUtil {
     private Date generateExpirationDate() {
         return new Date(System.currentTimeMillis() + expiration * 1000);
     }
+
+//    public Map<String, String> mapToken(String token){
+//        Map<String,String> tokenToString=new HashMap<>();
+//        tokenToString.put("token",token);
+//        return tokenToString;
+//    }
 }
