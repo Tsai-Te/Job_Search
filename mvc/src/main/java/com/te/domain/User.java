@@ -156,6 +156,11 @@ public class User implements UserDetails, Comparable<User>{
        // return (this.username-user.username);
     }
 
+    @Override
+    public String toString(){
+        return String.format("[%d|%s|%s|%s]",id,username,firstName, lastName, email);
+    }
+
 
 //    @Override
 //    public int compare(User user1, User user2) {
