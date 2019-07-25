@@ -158,7 +158,7 @@ public class User implements UserDetails, Comparable<User>{
 
     @Override
     public String toString(){
-        return String.format("[%d|%s|%s|%s]",id,username,firstName, lastName, email);
+        return String.format("[%d|%s|%s|%s]",id,username,firstName,lastName,email);
     }
 
 
