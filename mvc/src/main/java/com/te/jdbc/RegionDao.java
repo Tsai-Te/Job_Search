@@ -23,7 +23,7 @@ public class RegionDao {
 
             System.out.println("Creating statement...");
             statement=connection.createStatement();
-            String sql="SELECT * FROM user";
+            String sql="SELECT * FROM region";
             resultSet=statement.executeQuery(sql);
 
             while(resultSet.next()){
