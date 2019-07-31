@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -95,6 +96,23 @@ public class User implements UserDetails, Comparable<User>{
 //    @JsonIgnore
     public boolean isAccountNonLocked() {
         return !accountLocked;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id) &&
+                username.equals(user.username) &&
+                email.equals(user.email) &&
+                password.equals(user.password) &&
+                dateOfBirth.equals(user.dateOfBirth);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, email, password, dateOfBirth);
     }
 
     @Override
