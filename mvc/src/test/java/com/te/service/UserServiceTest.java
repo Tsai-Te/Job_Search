@@ -33,6 +33,10 @@ public class UserServiceTest {
     private String password="7";
     private String firstName="te";
     private String lastName="tsai";
+    private String newUsername="cai.te";
+    private String newEmailAddress="c.te@gmail.com";
+    private String newLastName="cai";
+    private String newFirstName="ter";
 
 
     @Autowired //if we need autowired, then we have to need these annotations
@@ -101,6 +105,42 @@ public class UserServiceTest {
         User actualUser=userService.findById(newUser.getId());
         assertNotNull(newUser);
         assertEquals(newUser.getId(),actualUser.getId());
+    }
+
+    @Test
+    @Transactional
+    public void editUsernameTest() throws ParseException {
+        User expectedUser = new User();
+        expectedUser.setUsername(username);
+        expectedUser.setEmail(email);
+        expectedUser.setPassword(password);
+        expectedUser.setLastName(lastName);
+        String date = "07/31/2019";
+        Date dateOfBirth = new SimpleDateFormat("MM/dd/yyyy").parse(date);
+        userService.editUsername(expectedUser, newUsername);
+        User userWithTheNewUsername=userService.findById(expectedUser.getId());
+        assertNotNull(username);
+        assertNotNull(newUsername);
+        assertNotNull(expectedUser);
+        assertEquals(expectedUser.getId(),userWithTheNewUsername.getId());
+        assertEquals(expectedUser.getUsername(),userWithTheNewUsername.getUsername());
+    }
+
+    @Test
+    @Transactional
+    public void editEmailAddressTest() throws ParseException {
+        User expectedUser = new User();
+        expectedUser.setUsername(username);
+        expectedUser.setEmail(email);
+        expectedUser.setPassword(password);
+        expectedUser.setLastName(lastName);
+        String date = "07/31/2019";
+        Date dateOfBirth = new SimpleDateFormat("MM/dd/yyyy").parse(date);
+        userService.editEmailAddress(expectedUser,newEmailAddress);
+        User userWithNewEmailAddress=userService.findById(expectedUser.getId());
+        assertNotNull(email);
+        assertNotNull(newEmailAddress);
+        assertEquals(expectedUser.getEmail(),userWithNewEmailAddress.getEmail());
     }
 
     @Test
@@ -178,7 +218,39 @@ public class UserServiceTest {
 //        assertEquals(newUser.getId(),actualUser.getId());
     }
 
+    @Test
+    @Transactional
+    public void editLastNameTest() throws ParseException {
+        User expectedUser = new User();
+        expectedUser.setUsername(username);
+        expectedUser.setEmail(email);
+        expectedUser.setPassword(password);
+        expectedUser.setLastName(lastName);
+        expectedUser.setFirstName(firstName);
+        String date = "03/12/2019";
+        Date dateOfBirth = new SimpleDateFormat("MM/dd/yyyy").parse(date);
+        userService.editLastName(expectedUser, newLastName);
+        User userWithNewLastName = userService.findById(expectedUser.getId());
+        assertNotNull(lastName);
+        assertNotNull(newLastName);
+        assertEquals(expectedUser.getLastName(), userWithNewLastName.getLastName());
+    }
 
+    @Test
+    @Transactional
+    public void editFirstNameTest() throws ParseException {
+        User expectedUser = new User();
+        expectedUser.setUsername(username);
+        expectedUser.setEmail(email);
+        expectedUser.setPassword(password);
+        expectedUser.setLastName(lastName);
+        String date = "03/11/2019";
+        Date dateOfBirth = new SimpleDateFormat("MM/dd/yyyy").parse(date);
+        expectedUser.setDateOfBirth(dateOfBirth);
+        userService.editFirstName(expectedUser, firstName);
+        User userWithNewFirstName = userService.findById(expectedUser.getId());
+        assertEquals(expectedUser.getId(), userWithNewFirstName.getId());
+    }
 
 
 
