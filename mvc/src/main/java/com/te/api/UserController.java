@@ -71,8 +71,8 @@ public class UserController  { //todo ask about BaseController
         return userService.findById(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET,params = {"firstName"}) //"params" is needed when we have multiple same API, such as /firstName, so we user "params" to seperate them. It must match with "@RequestParam("firstName")".
-    public List<User> findByFirstName(@RequestParam("firstName") String firstName){
+    @RequestMapping(method = RequestMethod.GET,params = {"first_name"}) //"params" is needed when we have multiple same API, such as /firstName, so we user "params" to seperate them. It must match with "@RequestParam("firstName")".
+    public List<User> findByFirstName(@RequestParam("first_name") String firstName){
         logger.debug("parameter is:"+firstName);
         return userService.findByFirstName(firstName);
     }
@@ -89,6 +89,19 @@ public class UserController  { //todo ask about BaseController
             logger.debug("could not find this username");
         }
         return user;
+    }
+
+    @RequestMapping(value="/{id}",method=RequestMethod.PATCH,params = {"username"})
+    public User changeUsername(@PathVariable("id") Long id, @RequestParam("username") String newUsername){
+        User user=userService.findById(id);
+        User result=userService.editUsername(user, newUsername);
+        return result;
+    }
+
+    @RequestMapping(value="/{id}",method = RequestMethod.PATCH,params={"email"})
+    public User changeEmailAddress(@PathVariable("id") Long id, @RequestParam("email") String newEmailAddress){
+        User user=userService.findById(id);
+        return userService.editEmailAddress(user, newEmailAddress);
     }
 
     @RequestMapping (value="/login", method = RequestMethod.POST) //todo write an api for login by username or email
@@ -166,11 +179,24 @@ public class UserController  { //todo ask about BaseController
         return sortedUsername;
     }
 
-    @RequestMapping(value="/lastName/sort", method=RequestMethod.GET,params = {"lastName"})
-    public List<User> descendLastName(@RequestParam("lastName") String lastName){
+    @RequestMapping(value="/lastName/sort", method=RequestMethod.GET,params = {"last_name"})
+    public List<User> descendLastName(@RequestParam("last_name") String lastame){
         List<User> unsortedLastName=userService.findAll();
         List<User> sortedLastName=userService.descendLastName(unsortedLastName);
         return sortedLastName;
+    }
+
+    @RequestMapping(value="/{id}",method = RequestMethod.PATCH,params = {"last_name"})
+    public User editLastName(@PathVariable("id") Long id, @RequestParam("last_name") String newLastName){
+        User user=userService.findById(id);
+        return userService.editLastName(user,newLastName);
+    }
+
+    @RequestMapping(value="/{id}",method = RequestMethod.PATCH,params = {"first_name"})
+    public User editFirstName(@PathVariable("id") Long id, @RequestParam("first_name") String firstName){
+        User user=userService.findById(id);
+        User userWithNewFirstName=userService.editFirstName(user,firstName);
+        return userWithNewFirstName;
     }
 
 //    public List<User> userComparator(String lastName){

@@ -86,6 +86,25 @@ public class UserService {
         return userRepository.findByFirstName(firstName);
     }
 
+    @Transactional
+    public User editUsername(User user, String newUsername){
+        user.setUsername(newUsername);
+        User result=userRepository.save(user);
+        return result;
+    }
+
+    @Transactional
+    public User editEmailAddress(User user, String newEmailAddress){
+        user.setEmail(newEmailAddress);
+        return userRepository.save(user);
+    }
+
+    @Transactional
+    public User editLastName(User user, String lastName){
+        user.setLastName(lastName);
+        return userRepository.save(user);
+    }
+
 //    @Transactional
 //    public User findByIdEager(Long Id){
 //        return userRepository.findByIdEager(Id).get();
@@ -125,6 +144,11 @@ public class UserService {
         return userComparator;
     }
 
+    @Transactional
+    public User editFirstName(User user, String firstName){
+        user.setFirstName(firstName);
+        return userRepository.save(user);
+    }
 
 //    public User findByAuthority(String authority){
 //        return userRepository.findUserByAuthority(authority);
