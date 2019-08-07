@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,6 +43,9 @@ public class AuthorityServiceTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Test
     @Transactional
@@ -77,6 +81,8 @@ public class AuthorityServiceTest {
 //
         List<Authority> actualAuthorities=authorityService.findAuthoritiesByUser_Id(expectedUser.getId());
         Authority actualAuthority=actualAuthorities.get(0);
+        entityManager.flush();
+        entityManager.refresh(expectedUser);
 
         for(Authority newAuthority : actualAuthorities){
             assertEquals(newAuthority.getAuthority(),authority);
