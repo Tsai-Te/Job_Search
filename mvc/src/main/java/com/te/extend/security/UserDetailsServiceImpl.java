@@ -34,7 +34,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User domainUser = null;
         try {
             domainUser = userService.findByEmailOrUsername(emailOrUsername); //username is argument
-        } catch (NotFoundException | NullPointerException repositoryProblem) {
+        }
+
+        catch (NotFoundException | NullPointerException repositoryProblem) {
             logger.debug("catch AuthenticationServiceException from AuthenticationProvider");
         }
 //            if (domainUser == null) {
@@ -42,9 +44,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //            }
             //TODO add authority into user
             // rodo ask why does wamt not need this?
+        finally{
         List<Authority> userAuthority = authorityService.findAuthoritiesByUser_Id(domainUser.getId());
 //        Collection<GrantedAuthority> authorities= Utils.getAuthorities(userAuthority);
-        domainUser.setAuthorities(userAuthority);
+        domainUser.setAuthorities(userAuthority);}
         return domainUser;
     }
 
