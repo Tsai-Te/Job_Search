@@ -146,6 +146,8 @@ public class User implements UserDetails, Comparable<User>{
     public String getEmail(){return email;}
     public void setEmail(String email){this.email=email;}
 
+    public List<Image> getImages(){return images;}
+
     @Override
     @JsonIgnore
     @Transient
