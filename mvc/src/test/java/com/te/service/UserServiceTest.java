@@ -313,6 +313,61 @@ public class UserServiceTest {
 
     }
 
+    @Test
+    @Transactional
+    public void descendUsernameTest() throws ParseException {
+        User expectedUser1 = new User();
+        expectedUser1.setUsername("abc");
+        expectedUser1.setEmail("abc.com");
+        expectedUser1.setPassword(password);
+        expectedUser1.setFirstName("abcF");
+        expectedUser1.setLastName("abcL");
+        String date1 = "08/28/2019";
+        Date dateOfBirth1 = new SimpleDateFormat("MM/dd/yyyy").parse(date1);
+        expectedUser1.setDateOfBirth(dateOfBirth1);
+        userService.createUser(expectedUser1);
+
+        User expectedUser2 = new User();
+        expectedUser2.setUsername("def");
+        expectedUser2.setEmail("def.com");
+        expectedUser2.setPassword(password);
+        expectedUser2.setLastName("abcL");
+        expectedUser2.setFirstName("defF");
+        String date2 = "08/28/2019";
+        Date dateOfBirth2 = new SimpleDateFormat("MM/dd/yyyy").parse(date2);
+        expectedUser2.setDateOfBirth(dateOfBirth2);
+        userService.createUser(expectedUser2);
+
+        User expectedUser3 = new User();
+        expectedUser3.setUsername("ghi");
+        expectedUser3.setEmail("ghi.com");
+        expectedUser3.setPassword(password);
+        expectedUser3.setLastName("ghiL");
+        expectedUser3.setFirstName("ghiF");
+        String date3 = "08/28/2019";
+        Date dateOfBirth3 = new SimpleDateFormat("MM/dd/yyyy").parse(date3);
+        expectedUser3.setDateOfBirth(dateOfBirth3);
+        userService.createUser(expectedUser3);
+
+        User expectedUser4 = new User();
+        expectedUser4.setUsername("jkl");
+        expectedUser4.setEmail("jkl.com");
+        expectedUser4.setPassword(password);
+        expectedUser4.setLastName("jklL");
+        expectedUser4.setFirstName("jklF");
+        String date4 = "08/28/2019";
+        Date dateOfBirth4 = new SimpleDateFormat("MM/dd/yyyy").parse(date4);
+        expectedUser4.setDateOfBirth(dateOfBirth4);
+        userService.createUser(expectedUser4);
+
+        List<User> originalUsers = new ArrayList<>(userService.findAll());
+        Collections.sort(originalUsers);
+        List<User> sortedUsers=userService.descendUsername(userService.findAll());
+
+        assertEquals(originalUsers,sortedUsers);
+    }
+
+
 
 
 
