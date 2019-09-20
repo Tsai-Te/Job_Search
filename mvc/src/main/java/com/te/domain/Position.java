@@ -42,4 +42,9 @@ public class Position {
 
     public Region getRegion(){return region;}
     public void setRegion(Region region){this.region=region;}
+
+    @Override
+    public String toString(){
+        return String.format("[%d|%s|%s|%s]",id,auditor,engineer,manager);
+    }
 }

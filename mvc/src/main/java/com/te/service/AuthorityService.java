@@ -15,7 +15,10 @@ public class AuthorityService {
     private AuthorityRepository authorityRepository;
 
     @Transactional
-    public Authority findById(Long id){
+    public Authority findById(Long id) throws Exception{
+        if(id==null){
+            throw new NullPointerException("");
+        }
         return authorityRepository.findById(id).get();
     }
 
@@ -25,7 +28,10 @@ public class AuthorityService {
     }
 
     @Transactional
-    public List<Authority> findAuthoritiesByUser_Id (Long user_Id){
+    public List<Authority> findAuthoritiesByUser_Id (Long user_Id) throws Exception{
+        if(user_Id==null){
+            throw new NullPointerException("");
+        }
         return authorityRepository.findAuthoritiesByUser_Id(user_Id);
     }
 

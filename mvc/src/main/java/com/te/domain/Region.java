@@ -39,4 +39,9 @@ public class Region {
 
     public List<Position> getPositions(){return positions;}
     public void setPositions(List<Position> positions){this.positions=positions;}
+
+    @Override
+    public String toString(){
+        return String.format("[%d|%s|%s|%d]",id,state,city,zipCode);
+    }
 }

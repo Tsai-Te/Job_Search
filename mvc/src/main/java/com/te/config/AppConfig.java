@@ -36,7 +36,7 @@ public class AppConfig { //whole project configuration //backend
     @Bean(name="databaseProperties")
     public PropertiesFactoryBean getDbProperties(){ // PropertiesFactoryBean is to generate Properties Factory Bean class. so we can invoke the bean in dataSourceInitializer.
         PropertiesFactoryBean bean= new PropertiesFactoryBean();
-        String profile=environment.getActiveProfiles()[0];//todo ask what is [0], index 1
+        String profile=environment.getActiveProfiles()[0];//index 1
         logger.debug("databaseProperties is"+profile);
         bean.setLocation(new ClassPathResource("META-INF/env/application-"+profile+".properties")); //appConfig
         return bean;
@@ -68,11 +68,4 @@ public class AppConfig { //whole project configuration //backend
         MessageSQSService messageSQSService = new MessageSQSService(sqs,queueUrl);
         return messageSQSService;
     }
-
-//    @Bean
-//    public AmazonSQS getAmazonSQS(){
-//        AmazonSQS client=AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
-//        return client;
-//    }
-
 }

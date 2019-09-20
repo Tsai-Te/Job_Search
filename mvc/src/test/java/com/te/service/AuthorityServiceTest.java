@@ -81,6 +81,8 @@ public class AuthorityServiceTest {
 //
         List<Authority> actualAuthorities=authorityService.findAuthoritiesByUser_Id(expectedUser.getId());
         Authority actualAuthority=actualAuthorities.get(0);
+        entityManager.flush();
+        entityManager.refresh(expectedUser);
 
         entityManager.flush();
         entityManager.refresh(expectedUser);
