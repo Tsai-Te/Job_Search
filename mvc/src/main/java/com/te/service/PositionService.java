@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.Null;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,12 +22,18 @@ public class PositionService {
     }
 
     @Transactional
-    public List<Position> findByAuditor (String auditor){
+    public List<Position> findByAuditor (String auditor) throws Exception{
+        if(auditor==null){
+            throw new NullPointerException("");
+        }
         return positionRepository.findByAuditor(auditor);
     }
 
     @Transactional
-    public List<Position> findByManager (String manager){
+    public List<Position> findByManager (String manager) throws Exception{
+        if(manager==null){
+            throw new NullPointerException("");
+        }
         return positionRepository.findByManager(manager);
     }
 

@@ -43,13 +43,19 @@ public class PositionController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"auditor"})
-    public List<Position> findByAuditor(@RequestParam("auditor") String auditor){
+    public List<Position> findByAuditor(@RequestParam("auditor") String auditor) throws Exception{
+        if(auditor==null){
+            throw new NullPointerException("");
+        }
         logger.debug("parameter is:"+auditor);
         return positionService.findByAuditor(auditor);
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"manager"})
-    public List<Position> findByManager(@RequestParam("manager") String manager){
+    public List<Position> findByManager(@RequestParam("manager") String manager) throws Exception{
+        if(manager==null){
+            throw new NullPointerException("");
+        }
         logger.debug("parameter is:"+manager);
         return positionService.findByManager(manager);
     }
@@ -61,7 +67,10 @@ public class PositionController {
     }
 
     @RequestMapping(value="/region/{region_id}", method=RequestMethod.GET)
-    public Region findPositionsByRegionId(@PathVariable("region_id") Long regionId){
+    public Region findPositionsByRegionId(@PathVariable("region_id") Long regionId) throws Exception{
+        if(regionId==null){
+            throw new NullPointerException("");
+        }
         logger.debug("parameter is:"+regionId);
         Region result=regionService.findByIdEager(regionId);
         return result;

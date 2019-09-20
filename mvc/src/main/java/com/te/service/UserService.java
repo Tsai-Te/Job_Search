@@ -23,11 +23,11 @@ public class UserService {
 
 
     @Transactional
-    public List<User> findAll() throws Exception{
+    public List<User> findAll() {
         List<User> users=userRepository.findAll();
-        if(users==null){
-            throw new NotFoundException("");
-        }
+//        if(users==null){
+//            throw new NotFoundException("");
+//        }
         return users;
     }
 

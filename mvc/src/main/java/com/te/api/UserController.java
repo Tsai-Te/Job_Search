@@ -66,14 +66,20 @@ public class UserController  { //todo ask about BaseController
 
     //    @RequestMapping(method = RequestMethod.GET)//todo ask why this is incorrect
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public User findById(@PathVariable("id") Long id){
+    public User findById(@PathVariable("id") Long id) throws Exception{
         logger.debug("user path variable is:"+id);
+        if(id==null){
+            throw new NullPointerException("");
+        }
         return userService.findById(id);
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"first_name"}) //"params" is needed when we have multiple same API, such as /firstName, so we user "params" to seperate them. It must match with "@RequestParam("firstName")".
-    public List<User> findByFirstName(@RequestParam("first_name") String firstName){
+    public List<User> findByFirstName(@RequestParam("first_name") String firstName) throws Exception{
         logger.debug("parameter is:"+firstName);
+        if(firstName==null){
+            throw new NullPointerException("");
+        }
         return userService.findByFirstName(firstName);
     }
 
@@ -92,14 +98,20 @@ public class UserController  { //todo ask about BaseController
     }
 
     @RequestMapping(value="/{id}",method=RequestMethod.PATCH,params = {"username"})
-    public User changeUsername(@PathVariable("id") Long id, @RequestParam("username") String newUsername){
+    public User changeUsername(@PathVariable("id") Long id, @RequestParam("username") String newUsername) throws Exception{
+        if(id==null){
+            throw new NullPointerException("");
+        }
         User user=userService.findById(id);
         User result=userService.editUsername(user, newUsername);
         return result;
     }
 
     @RequestMapping(value="/{id}",method = RequestMethod.PATCH,params={"email"})
-    public User changeEmailAddress(@PathVariable("id") Long id, @RequestParam("email") String newEmailAddress){
+    public User changeEmailAddress(@PathVariable("id") Long id, @RequestParam("email") String newEmailAddress) throws Exception{
+        if(id==null){
+            throw new NullPointerException("");
+        }
         User user=userService.findById(id);
         return userService.editEmailAddress(user, newEmailAddress);
     }
@@ -173,7 +185,10 @@ public class UserController  { //todo ask about BaseController
     }
 
     @RequestMapping(value = "/username/sort", method=RequestMethod.GET,params = {"username"})
-    public List<User> descendUsername(@RequestParam("username") String username){
+    public List<User> descendUsername(@RequestParam("username") String username) throws Exception{
+        if(username==null){
+            throw new NullPointerException("");
+        }
         List<User> unsortedUsername=userService.findAll();
         List<User> sortedUsername=userService.descendUsername(unsortedUsername);
         return sortedUsername;
@@ -187,13 +202,19 @@ public class UserController  { //todo ask about BaseController
     }
 
     @RequestMapping(value="/{id}",method = RequestMethod.PATCH,params = {"last_name"})
-    public User editLastName(@PathVariable("id") Long id, @RequestParam("last_name") String newLastName){
+    public User editLastName(@PathVariable("id") Long id, @RequestParam("last_name") String newLastName) throws Exception{
+        if(id==null){
+            throw new NullPointerException("");
+        }
         User user=userService.findById(id);
         return userService.editLastName(user,newLastName);
     }
 
     @RequestMapping(value="/{id}",method = RequestMethod.PATCH,params = {"first_name"})
-    public User editFirstName(@PathVariable("id") Long id, @RequestParam("first_name") String firstName){
+    public User editFirstName(@PathVariable("id") Long id, @RequestParam("first_name") String firstName) throws Exception{
+        if(id==null){
+            throw new NullPointerException("");
+        }
         User user=userService.findById(id);
         User userWithNewFirstName=userService.editFirstName(user,firstName);
         return userWithNewFirstName;

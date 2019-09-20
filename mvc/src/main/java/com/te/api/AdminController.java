@@ -30,7 +30,10 @@ public class AdminController {
     private UserService userService;
 
     @RequestMapping(value = {"/user/{id}","/users/{id}"}, method = RequestMethod.PUT)
-    private User elevateAdminRole(@PathVariable("id") Long id){
+    private User elevateAdminRole(@PathVariable("id") Long id) throws Exception{
+        if(id==null){
+            throw new NullPointerException("");
+        }
         logger.debug("User path variable is:" +id);
         User user=userService.findById(id);
         Authority authorityAdmin=new Authority();
