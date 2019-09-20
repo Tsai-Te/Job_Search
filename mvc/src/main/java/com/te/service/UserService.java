@@ -23,8 +23,12 @@ public class UserService {
 
 
     @Transactional
-    public List<User> findAll(){
-        return userRepository.findAll();
+    public List<User> findAll() throws Exception{
+        List<User> users=userRepository.findAll();
+        if(users==null){
+            throw new NotFoundException("");
+        }
+        return users;
     }
 
     private BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
@@ -77,13 +81,27 @@ public class UserService {
     }
 
     @Transactional
-    public User findById(Long id){
-        return userRepository.findById(id).get();
+    public User findById(Long id) throws Exception{
+        if(id==null){
+            throw new NullPointerException("User id is not found");
+        }
+        User user= userRepository.findById(id).get();
+        if(user == null){
+            throw new NotFoundException("User is not found");
+        }
+        return user;
     } //todo ask get()
 
     @Transactional
-    public List<User> findByFirstName(String firstName){
-        return userRepository.findByFirstName(firstName);
+    public List<User> findByFirstName(String firstName) throws Exception{
+        if(firstName==null){
+            throw new NullPointerException("");
+        }
+        List<User> users=userRepository.findByFirstName(firstName);
+        if(users==null){
+            throw new NotFoundException("");
+        }
+        return users;
     }
 
     @Transactional
@@ -126,8 +144,11 @@ public class UserService {
     }
 
     @Transactional
-    public List<User> descendUsername (List<User> unsortedUsername){
+    public List<User> descendUsername (List<User> unsortedUsername) throws Exception{
 //        Collections.sort(unsortedUsername,new UserComparator());
+        if(unsortedUsername==null){
+            throw new NullPointerException("");
+        }
         Collections.sort(unsortedUsername,new UserIdComparator());
         return unsortedUsername;
     }

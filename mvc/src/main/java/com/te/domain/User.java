@@ -112,7 +112,7 @@ public class User implements UserDetails, Comparable<User>{
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, password, dateOfBirth);
+        return Objects.hash(id, username, email);
     }
 
     @Override
